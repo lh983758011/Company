@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:background="@drawable/background_cornor_white">
+    
+    <android.support.v7.widget.AppCompatTextView
+        android:id="@+id/work_type_tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="工作方式"
+        android:padding="15dp"
+        android:textSize="15sp"
+        android:textColor="@color/text_black"/>
+
+    <View
+        android:id="@+id/work_type_line"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:background="@color/line_gray"
+        />
+
+    <RadioGroup
+        android:id="@+id/work_type_rg_type"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_alignParentRight="true"
+        android:padding="20dp"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+        <com.goldenchef.company.widgets.CustomRadioButton
+            android:id="@+id/work_type_rb_all"
+            android:checked="true"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:button="@null"
+            android:text="全职"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_black"
+            android:textSize="15sp"
+            app:drawableWidth="20dp"
+            app:drawableHeight="20dp"
+            android:drawableRight="@drawable/background_checkbox_red"/>
+
+        <com.goldenchef.company.widgets.CustomRadioButton
+            android:id="@+id/work_type_rb_part_time"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:button="@null"
+            android:text="兼职"
+            android:gravity="center_vertical"
+            android:textColor="@color/text_black"
+            android:textSize="15sp"
+            app:drawableWidth="20dp"
+            app:drawableHeight="20dp"
+            android:drawableRight="@drawable/background_checkbox_red"/>
+    </RadioGroup>
+
+</LinearLayout>

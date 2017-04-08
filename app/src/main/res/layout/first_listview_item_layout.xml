@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:paddingTop="20dp"
+    android:background="@color/white">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <TextView
+            android:id="@+id/manage_item_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="15dp"
+            android:text="专业铁板烧厨师(2名)"
+            android:textColor="@android:color/black"
+            android:textSize="16sp" />
+
+        <TextView
+            android:id="@+id/manage_item_tv_salary"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/manage_item_tv_title"
+            android:layout_marginLeft="15dp"
+            android:layout_marginTop="20dp"
+            android:text="4800-6000元/月"
+            android:textColor="@color/red"
+            android:textSize="13sp" />
+
+        <TextView
+            android:id="@+id/manage_item_tv_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="全职"
+            android:layout_marginLeft="15dp"
+            android:paddingTop="2dp"
+            android:paddingBottom="2dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:textSize="11sp"
+            android:background="@drawable/background_circle_red"
+            android:layout_toRightOf="@id/manage_item_tv_salary"
+            android:layout_alignTop="@id/manage_item_tv_salary"
+            android:textColor="@color/red"/>
+
+        <com.goldenchef.company.widgets.CustomTextView
+            android:id="@+id/manage_item_btn_detail"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="10dp"
+            app:drawableWidth="20dp"
+            app:drawableHeight="20dp"
+            android:drawableRight="@drawable/arrow_carrot_right"
+            android:layout_centerVertical="true"
+            />
+
+    </RelativeLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.5dp"
+        android:layout_marginTop="20dp"
+        android:background="@color/line" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="48dp"
+        android:orientation="horizontal">
+
+        <com.goldenchef.company.widgets.CustomTextView
+            android:id="@+id/manage_item_btn_refresh"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            app:drawableWidth="18dp"
+            app:drawableHeight="18dp"
+            android:drawableLeft="@drawable/shuaxin_icon"
+            android:text="刷新"
+            android:textSize="11sp"/>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/line" />
+
+        <com.goldenchef.company.widgets.CustomTextView
+            android:id="@+id/manage_item_btn_edit"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            app:drawableWidth="18dp"
+            app:drawableHeight="18dp"
+            android:drawableLeft="@drawable/bianji_icon"
+            android:text="编辑"
+            android:textSize="11sp"/>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/line" />
+
+        <com.goldenchef.company.widgets.CustomTextView
+            android:id="@+id/manage_item_btn_cancel"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:drawableLeft="@drawable/xiaxian_icon"
+            android:gravity="center"
+            android:text="下线"
+            android:textSize="11sp"
+            app:drawableWidth="18dp"
+            app:drawableHeight="18dp"/>
+
+        <View
+            android:layout_width="0.5dp"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:background="@color/line" />
+
+        <com.goldenchef.company.widgets.CustomTextView
+            android:id="@+id/manage_item_btn_top"
+            android:layout_width="0dp"
+            android:paddingLeft="20dp"
+            android:paddingRight="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@null"
+            android:gravity="center"
+            android:drawableLeft="@drawable/zhiding_icon"
+            android:text="置顶"
+            android:textSize="11sp"
+            app:drawableWidth="18dp"
+            app:drawableHeight="18dp"/>
+
+    </LinearLayout>
+
+
+</LinearLayout>

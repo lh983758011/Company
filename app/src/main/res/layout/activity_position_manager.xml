@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/gray">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/manage_tb"
+            android:fitsSystemWindows="true"
+            android:clipToPadding="true"
+            android:layout_width="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_height="wrap_content">
+
+            <ImageView
+                android:id="@+id/position_manager_btn_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_gravity="left|center_vertical"
+                android:background="@null"
+                android:src="@drawable/fanhui_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="职位管理（2）"
+                android:textColor="@color/title_red"
+                android:textSize="20sp"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"/>
+
+    </android.support.design.widget.AppBarLayout>
+
+    <android.support.v4.widget.SwipeRefreshLayout
+        android:id="@+id/manage_rl"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="60dp"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/manage_rv"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_gravity="bottom|center_horizontal"
+        android:background="@color/white">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"/>
+
+        <com.goldenchef.company.widgets.CustomTextView
+            android:layout_marginRight="20dp"
+            android:layout_marginLeft="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:text="发布一个新的职位"
+            android:textSize="18sp"
+            android:gravity="left|center_vertical"
+            android:paddingLeft="85dp"
+            android:drawablePadding="10dp"
+            android:drawableLeft="@drawable/fabuzhiwei01_icon"
+            android:textColor="@android:color/white"
+            android:background="@drawable/background_circle_solid_red"
+            android:layout_centerInParent="true"
+            app:drawableWidth="15dp"
+            app:drawableHeight="15dp"/>
+    </RelativeLayout>
+
+</android.support.design.widget.CoordinatorLayout>

@@ -1,0 +1,51 @@
+apply plugin: 'com.android.application'
+apply plugin: 'com.neenbedankt.android-apt'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+    defaultConfig {
+        applicationId "com.goldenchef.company"
+        minSdkVersion 21
+        targetSdkVersion 25
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+    }
+    buildTypes {
+        /*release {
+            minifyEnabled false
+            shrinkResources false  //移除无用资源文件
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }*/
+    }
+}
+
+dependencies {
+    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile 'com.android.support:design:25.1.0'
+    compile 'com.android.support:palette-v7:25.1.0'
+    compile 'com.android.support:appcompat-v7:25.1.0'
+    compile 'com.android.support:support-v4:25.1.0'
+
+    compile 'com.jakewharton:butterknife:8.5.1'
+    apt 'com.jakewharton:butterknife-compiler:8.5.1'
+
+    compile 'de.hdodenhof:circleimageview:2.1.0'
+    compile 'io.reactivex:rxjava:1.2.7'
+    compile 'io.reactivex:rxandroid:1.2.1'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
+    compile 'com.squareup.retrofit2:retrofit:2.2.0'
+    compile 'com.squareup.retrofit2:converter-gson:2.2.0'
+    compile 'com.squareup.retrofit2:adapter-rxjava:2.2.0'
+    compile 'com.contrarywind:Android-PickerView:3.0.5'
+    compile('com.afollestad.material-dialogs:core:0.9.4.1') {
+        transitive true
+    }
+    compile 'com.makeramen:roundedimageview:2.3.0'
+    //dagger2
+    provided 'javax.annotation:javax.annotation-api:1.2'
+    compile 'com.google.dagger:dagger:2.10-rc4'
+    apt 'com.google.dagger:dagger-compiler:2.10-rc4'
+}

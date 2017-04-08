@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">企业端</string>
+
+    <string name="input_phone">请输入手机号</string>
+    <string name="verification_code">验证码</string>
+    <string name="get_verification_code">获取验证码</string>
+    <string name="code_retry">长时间收不到验证码，可尝试</string>
+    <string name="language_access_verification_code">语言接听验证码</string>
+    <string name="into">进入</string>
+    <string name="you_can">您也可以</string>
+    <string name="user_agreement">用户协议</string>
+    <string name="password_login">密码登录</string>
+
+    <string name="phonenum_could_not_empty">手机号不能为空</string>
+    <string name="phonenum_format_is_error">手机号格式不对</string>
+    <string name="code_could_not_empty">验证码不能为空</string>
+
+    <string name="position_name_tip">输入多个职位名会影响精确匹配，且职位排位名靠后</string>
+    <string name="contact_tip">可以让对您职位感兴趣的求职者直接对你打电话，提高招聘效率</string>
+
+    <string name="please_input_content">请输入内容</string>
+
+    <string name="number_of_content">%1$s/%2$s</string>
+
+    <string name="salary">%dk</string>
+    <string name="salary_f">%.1fk</string>
+    <string name="excepted_job">期望工作：%s</string>
+    <string name="resume_detail">%1$s&#160;&#160;%2$s岁&#160;&#160;%3$s&#160;&#160;%4$s年工作经验</string>
+
+</resources>

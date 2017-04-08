@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/activity_edit_position"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+    <android.support.design.widget.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/sign_out_tb"
+            android:fitsSystemWindows="true"
+            android:clipToPadding="true"
+            android:layout_width="match_parent"
+            android:minHeight="?attr/actionBarSize"
+            android:layout_height="wrap_content"
+            >
+
+            <ImageView
+                android:id="@+id/setting_btn_back"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@null"
+                android:src="@drawable/fanhui_icon"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="设置"
+                android:textColor="@color/title_red"
+                android:textSize="20sp"/>
+
+        </android.support.v7.widget.Toolbar>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/line"/>
+    </android.support.design.widget.AppBarLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior"
+        android:layout_marginTop="10dp"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/setting_layout_modify_password"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/background_ripple_gray"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_black"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:text="修改密码"/>
+
+
+        </RelativeLayout>
+
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/white">
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:background="@color/gray"/>
+        </FrameLayout>
+
+        <RelativeLayout
+            android:id="@+id/setting_layout_change_phone"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:background="@drawable/background_ripple_gray"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/text_black"
+                android:textSize="15sp"
+                android:layout_centerVertical="true"
+                android:text="更换手机"/>
+
+        </RelativeLayout>
+
+        <android.support.v7.widget.AppCompatButton
+            android:id="@+id/sign_out_btn"
+            android:layout_marginTop="49dp"
+            android:layout_below="@id/salary_range_ll_range"
+            android:layout_width="280dp"
+            android:layout_height="45dp"
+            android:text="退  出"
+            android:textColor="@color/text_title_red"
+            android:textSize="18sp"
+            android:background="@drawable/background_oval_white"
+            android:layout_gravity="center_horizontal"/>
+
+    </LinearLayout>
+
+</android.support.design.widget.CoordinatorLayout>
+
