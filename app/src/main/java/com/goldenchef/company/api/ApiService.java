@@ -16,7 +16,7 @@ import rx.Observable;
 
 public interface ApiService {
 
-    String BASE_URL = "http://122.112.235.95:8080/goldchef-1.0-SNAPSHOT/";
+    String BASE_URL = "http://139.196.232.166:8081/goldchef/";
 
 //    String BASE_URL = "http://m2.beacool.com:8080/mozan-1.0-SNAPSHOT/";
 
