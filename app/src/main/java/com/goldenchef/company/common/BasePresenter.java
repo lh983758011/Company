@@ -1,4 +1,4 @@
-package com.goldenchef.company;
+package com.goldenchef.company.common;
 
 import android.support.annotation.NonNull;
 

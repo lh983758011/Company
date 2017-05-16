@@ -8,9 +8,9 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.View;
 
-import com.goldenchef.company.BaseFragment;
 import com.goldenchef.company.PositionManagerActivity;
 import com.goldenchef.company.R;
+import com.goldenchef.company.common.BaseFragment;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.login.SignOutActivity;
 import com.goldenchef.company.position.EditPositionActivity;

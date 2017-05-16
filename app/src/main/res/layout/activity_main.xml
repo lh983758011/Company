@@ -40,6 +40,18 @@
             android:src="@drawable/background_button_shangpu" />
 
         <ImageView
+            android:id="@+id/main_btn_xiaoxi"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingBottom="9dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="11dp"
+            android:src="@drawable/background_button_shangpu" />
+
+        <ImageView
             android:id="@+id/main_btn_faxian"
             android:layout_width="0dp"
             android:layout_height="match_parent"

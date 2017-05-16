@@ -14,8 +14,8 @@ import android.widget.RadioButton;
 import android.widget.TextView;
 
 import com.bigkoo.pickerview.OptionsPickerView;
-import com.goldenchef.company.BaseActivity;
 import com.goldenchef.company.R;
+import com.goldenchef.company.common.BaseActivity;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.position.other.ContactActivity;
 import com.goldenchef.company.position.other.PositionDescriptionActivity;

@@ -1,4 +1,4 @@
-package com.goldenchef.company;
+package com.goldenchef.company.common;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -10,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.goldenchef.company.MyApplication;
+import com.goldenchef.company.R;
 import com.goldenchef.company.injector.component.AppComponent;
 
 import butterknife.ButterKnife;

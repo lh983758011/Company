@@ -2,14 +2,16 @@ package com.goldenchef.company.main;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
-import com.goldenchef.company.BaseActivity;
 import com.goldenchef.company.R;
+import com.goldenchef.company.common.BaseActivity;
 import com.goldenchef.company.home.HomeFragment;
 import com.goldenchef.company.injector.component.AppComponent;
+import com.goldenchef.company.message.MessageListFragment;
 import com.goldenchef.company.person.PersonFragment;
 
 import butterknife.BindView;
@@ -23,6 +25,9 @@ public class MainActivity extends BaseActivity {
     @BindView(R.id.main_btn_shangpu)
     View main_btn_shangpu;
 
+    @BindView(R.id.main_btn_xiaoxi)
+    View main_btn_xiaoxi;
+
     @BindView(R.id.main_btn_faxian)
     View main_btn_faxian;
 
@@ -30,10 +35,12 @@ public class MainActivity extends BaseActivity {
     View main_btn_wode;
 
     FragmentManager mFragmentManager;
-    FragmentTransaction mTransaction;
 
-    HomeFragment homeFragment;
-    PersonFragment personFragment;
+    HomeFragment mHomeFragment;
+    PersonFragment mPersonFragment;
+    MessageListFragment mMessageListFragment;
+
+    private Fragment mOldFragment, mCurrentFragment;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,30 +61,21 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void initView() {
         mFragmentManager = getSupportFragmentManager();
+        mHomeFragment = new HomeFragment();
+        mMessageListFragment = new MessageListFragment();
+        mPersonFragment = new PersonFragment();
 
-        mTransaction = mFragmentManager.beginTransaction();
-        HomeFragment homeFragment = HomeFragment.newInstance();
-        mTransaction.add(R.id.main_layout_content, homeFragment);
-        mTransaction.commit();
-
+        switchFragment(new Fragment(), mHomeFragment);
         main_btn_dachu.setSelected(true);
     }
 
-    @OnClick({R.id.main_btn_dachu, R.id.main_btn_shangpu, R.id.main_btn_faxian, R.id.main_btn_wode})
-    public void onClick(View view){
-        switch (view.getId()){
+    @OnClick({R.id.main_btn_dachu, R.id.main_btn_shangpu, R.id.main_btn_xiaoxi, R.id.main_btn_faxian, R.id.main_btn_wode})
+    public void onClick(View view) {
+        switch (view.getId()) {
             case R.id.main_btn_dachu:
                 //大厨
 //                StatusBarCompat.compat(this, getResources().getColor(R.color.colorPrimaryDark));
-
-                mTransaction = mFragmentManager.beginTransaction();
-                if(homeFragment == null) {
-                    homeFragment = HomeFragment.newInstance();
-                    mTransaction.add(R.id.main_layout_content, homeFragment);
-                }
-                hideFragment();
-                mTransaction.show(homeFragment);
-                mTransaction.commit();
+                switchFragment(mCurrentFragment, mHomeFragment);
 
                 selectedView(main_btn_dachu);
                 break;
@@ -87,6 +85,13 @@ public class MainActivity extends BaseActivity {
                 selectedView(main_btn_shangpu);
                 break;
 
+            case R.id.main_btn_xiaoxi:
+                //消息
+                switchFragment(mCurrentFragment, mMessageListFragment);
+
+                selectedView(main_btn_xiaoxi);
+                break;
+
             case R.id.main_btn_faxian:
                 //发现
                 selectedView(main_btn_faxian);
@@ -94,15 +99,7 @@ public class MainActivity extends BaseActivity {
             case R.id.main_btn_wode:
                 //我的
 //                StatusBarCompat.compat(this, getResources().getColor(R.color.title_red));
-
-                mTransaction = mFragmentManager.beginTransaction();
-                if(personFragment == null) {
-                    personFragment = PersonFragment.newInstance();
-                    mTransaction.add(R.id.main_layout_content, personFragment);
-                }
-                hideFragment();
-                mTransaction.show(personFragment);
-                mTransaction.commit();
+                switchFragment(mCurrentFragment, mPersonFragment);
 
                 selectedView(main_btn_wode);
                 break;
@@ -110,22 +107,38 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-    private void hideFragment(){
-        if (homeFragment != null)
-            mTransaction.hide(homeFragment);
-        if (personFragment != null)
-            mTransaction.hide(personFragment);
+    /**
+     * 切换Fragment
+     *
+     * @param from
+     * @param to
+     */
+    private void switchFragment(Fragment from, Fragment to) {
+        if (to == null)
+            return;
+
+        if (mCurrentFragment != to) {
+            mCurrentFragment = to;
+            FragmentTransaction mTransaction = mFragmentManager.beginTransaction();
+            if (!to.isAdded())
+                mTransaction.hide(from).add(R.id.main_layout_content, to);
+            else
+                mTransaction.hide(from).show(to);
+            mTransaction.commit();
+        }
     }
 
-    private void selectedView(View view){
+
+    private void selectedView(View view) {
         clearSelected();
         view.setSelected(true);
     }
 
-    private void clearSelected(){
+    private void clearSelected() {
         main_btn_dachu.setSelected(false);
         main_btn_shangpu.setSelected(false);
         main_btn_faxian.setSelected(false);
+        main_btn_xiaoxi.setSelected(false);
         main_btn_wode.setSelected(false);
     }
 }

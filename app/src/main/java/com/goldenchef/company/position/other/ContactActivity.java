@@ -6,8 +6,8 @@ import android.support.v7.widget.AppCompatEditText;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.goldenchef.company.BaseActivity;
 import com.goldenchef.company.R;
+import com.goldenchef.company.common.BaseActivity;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.utils.Utils;
 

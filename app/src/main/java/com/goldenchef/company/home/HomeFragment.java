@@ -12,8 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 
-import com.goldenchef.company.BaseFragment;
 import com.goldenchef.company.R;
+import com.goldenchef.company.common.BaseFragment;
 import com.goldenchef.company.entities.ResumeEntity;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.utils.SharedPreferencesUtil;

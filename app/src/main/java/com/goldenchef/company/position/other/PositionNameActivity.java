@@ -9,8 +9,8 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.TextView;
 
-import com.goldenchef.company.BaseActivity;
 import com.goldenchef.company.R;
+import com.goldenchef.company.common.BaseActivity;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.utils.Utils;
 

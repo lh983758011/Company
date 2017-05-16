@@ -1,7 +1,8 @@
 package com.goldenchef.company.position;
 
-import com.goldenchef.company.BasePresenter;
-import com.goldenchef.company.BaseView;
+
+import com.goldenchef.company.common.BasePresenter;
+import com.goldenchef.company.common.BaseView;
 
 import java.util.Map;
 
@@ -11,13 +12,13 @@ import java.util.Map;
 
 public interface PositionContract {
 
-    interface View extends BaseView{
+    interface View extends BaseView {
         void publishJobSuccessful(String result);
 
         void publishJobFailure(String result);
     }
 
-    interface Presenter extends BasePresenter<View>{
+    interface Presenter extends BasePresenter<View> {
         void publishJob(Map<String, String> map);
     }
 

@@ -1,7 +1,7 @@
 package com.goldenchef.company.login;
 
-import com.goldenchef.company.BasePresenter;
-import com.goldenchef.company.BaseView;
+import com.goldenchef.company.common.BasePresenter;
+import com.goldenchef.company.common.BaseView;
 
 /**
  * Created by luo-hao on 2017-03-16.

@@ -1,4 +1,4 @@
-package com.goldenchef.company;
+package com.goldenchef.company.common;
 
 import android.os.Build;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.view.WindowManager;
 import android.widget.Toast;
 
 import com.afollestad.materialdialogs.MaterialDialog;
+import com.goldenchef.company.MyApplication;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.utils.SharedPreferencesUtil;
 

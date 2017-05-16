@@ -30,8 +30,9 @@ android {
         release {
             // 不显示Log
             buildConfigField "boolean", "LOG_DEBUG", "false"
-            minifyEnabled false
-            shrinkResources false  //移除无用资源文件
+            minifyEnabled true
+            shrinkResources true  //移除无用资源文件
+            zipAlignEnabled true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }

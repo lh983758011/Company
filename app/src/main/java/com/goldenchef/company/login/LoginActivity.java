@@ -9,8 +9,8 @@ import android.support.v7.widget.AppCompatTextView;
 import android.util.Log;
 import android.view.View;
 
-import com.goldenchef.company.BaseActivity;
 import com.goldenchef.company.R;
+import com.goldenchef.company.common.BaseActivity;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.main.MainActivity;
 import com.goldenchef.company.utils.Constants;
@@ -127,7 +127,7 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
                     return;
                 }
 
-                mLoginPresenter.login(phoneNumber, "", code);
+                mLoginPresenter.login(phoneNumber, "123456", code);
                 break;
 
             case R.id.login_tv_get_verification_code:

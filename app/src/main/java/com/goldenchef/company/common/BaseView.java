@@ -1,4 +1,4 @@
-package com.goldenchef.company;
+package com.goldenchef.company.common;
 
 /**
  * Created by luo-hao on 2017-03-16.

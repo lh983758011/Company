@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.goldenchef.company.api.ApiService;
 import com.goldenchef.company.entities.LoginEntity;
 import com.goldenchef.company.entities.responses.LoginResponse;
+import com.goldenchef.company.utils.EasemobUtil;
 import com.goldenchef.company.utils.GsonConverter;
 
 import org.json.JSONException;
@@ -23,7 +24,7 @@ import rx.schedulers.Schedulers;
  * Created by luo-hao on 2017-03-07.
  */
 
-public class LoginPresenter implements LoginContract.Presenter{
+public class LoginPresenter implements LoginContract.Presenter {
 
     private LoginContract.View mLoginView;
     private ApiService mApiService;
@@ -41,8 +42,8 @@ public class LoginPresenter implements LoginContract.Presenter{
      * @param password
      * @param code
      */
-    public void login(String phoneNum, String password, String code) {
-        mSubscription = mApiService.login(phoneNum, password, code).subscribeOn(Schedulers.io())
+    public void login(final String phoneNum, final String password, String code) {
+        mSubscription = mApiService.login(phoneNum, "", code).subscribeOn(Schedulers.io())
                 .flatMap(new Func1<String, Observable<LoginEntity>>() {
                     @Override
                     public Observable<LoginEntity> call(String s) {
@@ -54,15 +55,24 @@ public class LoginPresenter implements LoginContract.Presenter{
                         if (loginMap != null)
                             entity = loginMap.getCompanyUser();
 
+                        //暂时这样处理
+                        //应该放在注册时
+                        EasemobUtil.registUser(phoneNum, password);
+
                         return Observable.just(entity);
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Action1<LoginEntity>() {
                     @Override
-                    public void call(LoginEntity result) {
+                    public void call(final LoginEntity result) {
                         if (result != null) {
+                            //环信登录
+                            EasemobUtil.login(phoneNum, password);
+
                             mLoginView.loginSuccessful(result.getToken());
+
+
                         } else
                             mLoginView.loginFailure("登录失败");
                     }

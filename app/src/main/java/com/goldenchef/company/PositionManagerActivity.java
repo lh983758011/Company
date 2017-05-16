@@ -8,6 +8,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.WindowManager;
 
+import com.goldenchef.company.common.BaseActivity;
 import com.goldenchef.company.entities.PositionEntity;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.widgets.DividerItemDecoration;
