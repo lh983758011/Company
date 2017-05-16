@@ -41,7 +41,7 @@
 -keepattributes Signature
 
 #抛出异常时保留代码行号，在异常分析中可以方便定位
--keepattributes SourceFile,LineNumberTable
+-keepattributes LineNumberTable
 
 -keepattributes Exceptions,InnerClasses
 
