@@ -252,7 +252,9 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
 
 
     protected void onConversationInit() {
+        //TODO 获取当前会话
         conversation = EMClient.getInstance().chatManager().getConversation(toChatUsername, EaseCommonUtils.getConversationType(chatType), true);
+        //TODO 标记当前会话全部已读
         conversation.markAllMessagesAsRead();
         // the number of messages loaded into conversation is getChatOptions().getNumberOfMessagesLoaded
         // you can change this number
@@ -263,6 +265,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             if (msgs != null && msgs.size() > 0) {
                 msgId = msgs.get(0).getMsgId();
             }
+            //TODO 分页获取当前会话
             conversation.loadMoreMsgFromDB(msgId, pagesize - msgCount);
         }
 
@@ -590,6 +593,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             if (username.equals(toChatUsername) || message.getTo().equals(toChatUsername)) {
                 messageList.refreshSelectLast();
                 EaseUI.getInstance().getNotifier().vibrateAndPlayTone(message);
+                //TODO 标记指定信息已读
                 conversation.markMessageAsRead(message.getMsgId());
             } else {
                 EaseUI.getInstance().getNotifier().onNewMsg(message);
@@ -908,6 +912,7 @@ public class EaseChatFragment extends EaseBaseFragment implements EMMessageListe
             public void onResult(boolean confirmed, Bundle bundle) {
                 if (confirmed) {
                     if (conversation != null) {
+                        //TODO 清除当前会话
                         conversation.clearAllMessages();
                     }
                     messageList.refresh();
