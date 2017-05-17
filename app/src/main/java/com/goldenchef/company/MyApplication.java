@@ -7,8 +7,8 @@ import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.injector.component.DaggerAppComponent;
 import com.goldenchef.company.injector.module.ApiModule;
 import com.goldenchef.company.utils.CrashHandler;
-import com.hyphenate.chat.EMClient;
 import com.hyphenate.chat.EMOptions;
+import com.hyphenate.easeui.controller.EaseUI;
 
 /**
  * Created by luo-hao on 2017-03-11.
@@ -34,7 +34,7 @@ public class MyApplication extends Application {
         options.setAcceptInvitationAlways(true);
         options.setAutoLogin(true); //自动登录
         //初始化
-        EMClient.getInstance().init(this, options);
+        EaseUI.getInstance().init(this, options);
     }
 
     public static MyApplication get(Context context) {

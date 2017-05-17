@@ -14,7 +14,7 @@ android {
         multiDexEnabled true
     }
 
-    lintOptions{
+    lintOptions {
         checkReleaseBuilds false
         abortOnError false
     }
@@ -41,7 +41,7 @@ android {
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
-        debug{
+        debug {
             // 显示Log
             buildConfigField "boolean", "LOG_DEBUG", "true"
             minifyEnabled false
@@ -81,6 +81,8 @@ dependencies {
     }
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.makeramen:roundedimageview:2.3.0'
+
+    compile 'pub.devrel:easypermissions:0.1.9'
     //环信
     compile project(':easeui')
 }

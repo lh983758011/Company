@@ -19,7 +19,7 @@
             android:fitsSystemWindows="true"
             android:minHeight="?attr/actionBarSize">
 
-            <com.goldenchef.company.widgets.CustomTextView
+            <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -27,9 +27,7 @@
                 android:gravity="center"
                 android:text="消息"
                 android:textColor="@color/text_title_red"
-                android:textSize="18sp"
-                app:drawableHeight="6dp"
-                app:drawableWidth="10dp" />
+                android:textSize="18sp" />
 
         </android.support.v7.widget.Toolbar>
 
@@ -43,13 +41,13 @@
     </android.support.design.widget.AppBarLayout>
 
     <android.support.v4.widget.SwipeRefreshLayout
-        android:id="@+id/home_rl"
+        android:id="@+id/message_list_rl"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
         <android.support.v7.widget.RecyclerView
-            android:id="@+id/home_rv"
+            android:id="@+id/message_list_rv"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
     </android.support.v4.widget.SwipeRefreshLayout>

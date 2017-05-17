@@ -2,6 +2,7 @@ package com.goldenchef.company.login;
 
 import com.goldenchef.company.common.BasePresenter;
 import com.goldenchef.company.common.BaseView;
+import com.goldenchef.company.entities.LoginEntity;
 
 /**
  * Created by luo-hao on 2017-03-16.
@@ -14,7 +15,7 @@ public class LoginContract {
 
         void getVerificationCodFailure(String result);
 
-        void loginSuccessful(String token);
+        void loginSuccessful(LoginEntity entity);
 
         void loginFailure(String result);
     }
