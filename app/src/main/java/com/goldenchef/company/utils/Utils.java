@@ -2,6 +2,7 @@ package com.goldenchef.company.utils;
 
 import android.app.Activity;
 import android.content.Context;
+import android.telephony.TelephonyManager;
 import android.text.TextUtils;
 
 import java.util.regex.Matcher;
@@ -29,7 +30,7 @@ public class Utils {
         return (int) (pxValue / scale + 0.5f);
     }
 
-    public static boolean isEmpty(String text){
+    public static boolean isEmpty(String text) {
         return TextUtils.isEmpty(text);
     }
 
@@ -57,12 +58,24 @@ public class Utils {
         return m.matches();
     }
 
-    public static int getScreenWidth(Activity context){
+    public static int getScreenWidth(Activity context) {
         return context.getWindowManager().getDefaultDisplay().getWidth(); // 屏幕宽（像素，如：480px）
     }
 
-    public static int getScreenHeight(Activity context){
+    public static int getScreenHeight(Activity context) {
         return context.getWindowManager().getDefaultDisplay().getHeight();
+    }
+
+    /**
+     * 获取设备ID
+     *
+     * @param context
+     * @return
+     */
+    public static String getDeviceID(Context context) {
+        TelephonyManager tm = (TelephonyManager) context.getSystemService(Context.TELEPHONY_SERVICE);
+        String DEVICE_ID = tm.getDeviceId();
+        return DEVICE_ID;
     }
 
 }

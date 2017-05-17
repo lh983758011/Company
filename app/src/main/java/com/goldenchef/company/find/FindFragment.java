@@ -5,10 +5,13 @@ import android.util.Base64;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.Toast;
 
 import com.goldenchef.company.R;
+import com.goldenchef.company.api.ToStringConverterFactory;
 import com.goldenchef.company.common.BaseFragment;
 import com.goldenchef.company.injector.component.AppComponent;
+import com.goldenchef.company.utils.Utils;
 import com.hyphenate.easeui.widget.EaseVoiceRecorderView;
 
 import java.io.BufferedInputStream;
@@ -18,6 +21,16 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import butterknife.BindView;
+import okhttp3.OkHttpClient;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
+import retrofit2.http.POST;
+import rx.Observable;
+import rx.android.schedulers.AndroidSchedulers;
+import rx.functions.Action1;
+import rx.schedulers.Schedulers;
 
 /**
  * Created by luo-hao on 2017/5/17.
@@ -74,11 +87,28 @@ public class FindFragment extends BaseFragment {
                                     stringBuffer.append(itemStr);
                                 }
 
-                                int oldStrlength = stringBuffer.toString().length();
-
+                                long fileSize = file.length();
                                 byte[] result = Base64.encode(stringBuffer.toString().getBytes("UTF-8"), Base64.DEFAULT);
+                                String resultStr = new String(result, "UTF-8");
+                                String deviceId = Utils.getDeviceID(mContext);
 
-                                Log.e("TAG", "oldStr:" + stringBuffer.toString() + "\n" + ", newStr:" + new String(result, "UTF-8"));
+
+                                createTestApi().testVoice((int) fileSize, deviceId, resultStr)
+                                        .subscribeOn(Schedulers.io())
+                                        .observeOn(AndroidSchedulers.mainThread())
+                                        .subscribe(new Action1<String>() {
+                                            @Override
+                                            public void call(String o) {
+                                                Log.e("TAG", "result:" + o);
+                                                Toast.makeText(mContext, "result:" + o, Toast.LENGTH_SHORT).show();
+                                            }
+                                        }, new Action1<Throwable>() {
+                                            @Override
+                                            public void call(Throwable throwable) {
+                                                Log.e("TAG", "throwable:" + throwable);
+                                                Toast.makeText(mContext, "result:" + throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                            }
+                                        });
 
                             } catch (FileNotFoundException e) {
                                 e.printStackTrace();
@@ -102,6 +132,26 @@ public class FindFragment extends BaseFragment {
         });
     }
 
+
+    public interface TestApi {
+
+        String BASE_URL = "http://139.129.35.116:3000/voice/";
+
+        @FormUrlEncoded
+        @POST(BASE_URL)
+        Observable<String> testVoice(@Field("len") Integer len, @Field("cuid") String cuid, @Field("speech") String speech);
+
+    }
+
+    private TestApi createTestApi() {
+        Retrofit mRetrofit = new Retrofit.Builder()
+                .baseUrl(TestApi.BASE_URL)
+                .client(new OkHttpClient())
+                .addConverterFactory(new ToStringConverterFactory())
+                .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
+                .build();
+        return mRetrofit.create(TestApi.class);
+    }
 
     @Override
     public void initData() {

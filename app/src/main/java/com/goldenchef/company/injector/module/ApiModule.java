@@ -16,16 +16,21 @@ import static com.goldenchef.company.api.ApiService.BASE_URL;
 /**
  * Created by luo-hao on 2017-03-16.
  */
-
 @Module
 public class ApiModule {
 
     @Singleton
     @Provides
-    public ApiService provideApiService() {
+    public OkHttpClient provideOkHttpClient(){
+        return new OkHttpClient();
+    }
+
+    @Singleton
+    @Provides
+    public ApiService provideApiService(OkHttpClient okHttpClient) {
         Retrofit mRetrofit = new Retrofit.Builder()
                 .baseUrl(BASE_URL)
-                .client(new OkHttpClient())
+                .client(okHttpClient)
                 .addConverterFactory(new ToStringConverterFactory())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();

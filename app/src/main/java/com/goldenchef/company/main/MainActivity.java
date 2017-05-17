@@ -1,10 +1,17 @@
 package com.goldenchef.company.main;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
+import android.provider.Settings;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.View;
 
@@ -21,10 +28,20 @@ import com.hyphenate.EMConnectionListener;
 import com.hyphenate.EMError;
 import com.hyphenate.chat.EMClient;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.OnClick;
+import pub.devrel.easypermissions.AfterPermissionGranted;
+import pub.devrel.easypermissions.EasyPermissions;
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements EasyPermissions.PermissionCallbacks {
+
+    private static final int RC_EXTERNAL_STORAGE = 0x01;
+    private static final int RC_WRITE_EXTERNAL_STORAGE = 0x04;
+    private static final int RC_RECORD_AUDIO = 0x02;
+    private static final int RC_CAMERA = 0x03;
+    private static final int RC_READ_PHONE_STATE = 0x05;
 
     @BindView(R.id.main_btn_dachu)
     View main_btn_dachu;
@@ -60,6 +77,7 @@ public class MainActivity extends BaseActivity {
     protected void onResume() {
         super.onResume();
         initEasemob();
+        requestPermission();
     }
 
     @Override
@@ -197,5 +215,150 @@ public class MainActivity extends BaseActivity {
                 }
             }
         });
+    }
+
+    private void requestPermission() {
+        requestExternalStorage();
+        requestCamera();
+        requestRecordAudio();
+        requestWriteExternalStorage();
+        requestReadPhoneState();
+    }
+
+    @AfterPermissionGranted(RC_EXTERNAL_STORAGE)
+    public boolean requestExternalStorage() {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
+            return true;
+        } else {
+            EasyPermissions.requestPermissions(this, "", RC_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE);
+            return false;
+        }
+    }
+
+    @AfterPermissionGranted(RC_READ_PHONE_STATE)
+    public boolean requestReadPhoneState() {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.READ_PHONE_STATE)) {
+            return true;
+        } else {
+            EasyPermissions.requestPermissions(this, "", RC_READ_PHONE_STATE, Manifest.permission.READ_PHONE_STATE);
+            return false;
+        }
+    }
+
+    @AfterPermissionGranted(RC_WRITE_EXTERNAL_STORAGE)
+    public boolean requestWriteExternalStorage() {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            return true;
+        } else {
+            EasyPermissions.requestPermissions(this, "", RC_WRITE_EXTERNAL_STORAGE, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+            return false;
+        }
+    }
+
+    @AfterPermissionGranted(RC_RECORD_AUDIO)
+    public boolean requestRecordAudio() {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.RECORD_AUDIO)) {
+            return true;
+        } else {
+            EasyPermissions.requestPermissions(this, "", RC_RECORD_AUDIO, Manifest.permission.RECORD_AUDIO);
+            return false;
+        }
+    }
+
+    @AfterPermissionGranted(RC_CAMERA)
+    public boolean requestCamera() {
+        if (EasyPermissions.hasPermissions(this, Manifest.permission.CAMERA)) {
+            return true;
+        } else {
+            EasyPermissions.requestPermissions(this, "", RC_CAMERA, Manifest.permission.CAMERA);
+            return false;
+        }
+    }
+
+    @Override
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
+    }
+
+    @Override
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
+        //成功
+    }
+
+    @Override
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
+        //失败
+        if (requestCode == RC_EXTERNAL_STORAGE) {
+            //读取文件
+            showConfirmDialog(this, "没有权限, 你需要去设置中开启读取手机存储权限.", "去设置", "取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(Settings.ACTION_APPLICATION_SETTINGS));
+                    finish();
+                }
+            }, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+        } else if (requestCode == RC_WRITE_EXTERNAL_STORAGE) {
+            //打开麦克风
+            showConfirmDialog(this, "没有权限, 你需要去设置中开启写入手机存储权限.", "去设置", "取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(Settings.ACTION_APPLICATION_SETTINGS));
+                    finish();
+                }
+            }, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+        } else if (requestCode == RC_RECORD_AUDIO) {
+            //打开麦克风
+            showConfirmDialog(this, "没有权限, 你需要去设置中开启麦克风权限.", "去设置", "取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(Settings.ACTION_APPLICATION_SETTINGS));
+                    finish();
+                }
+            }, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+        } else if (requestCode == RC_CAMERA) {
+            //打开相机
+            showConfirmDialog(this, "没有权限, 你需要去设置中开启相机权限.", "去设置", "取消", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    startActivity(new Intent(Settings.ACTION_APPLICATION_SETTINGS));
+                    finish();
+                }
+            }, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+
+                }
+            });
+        }
+    }
+
+    public static AlertDialog.Builder showConfirmDialog(Context context, String message, String
+            okString, String cancelString,
+                                                        DialogInterface.OnClickListener
+                                                                okClickListener,
+                                                        DialogInterface.OnClickListener
+                                                                cancelClickListener) {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage(message);
+        builder.setPositiveButton(okString, okClickListener);
+        builder.setNegativeButton(cancelString, cancelClickListener);
+        builder.setCancelable(false);
+        return builder;
     }
 }
