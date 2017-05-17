@@ -5,14 +5,21 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.View;
 
 import com.goldenchef.company.R;
 import com.goldenchef.company.common.BaseActivity;
+import com.goldenchef.company.find.FindFragment;
 import com.goldenchef.company.home.HomeFragment;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.message.MessageListFragment;
 import com.goldenchef.company.person.PersonFragment;
+import com.goldenchef.company.utils.SharedPreferencesUtil;
+import com.hyphenate.EMCallBack;
+import com.hyphenate.EMConnectionListener;
+import com.hyphenate.EMError;
+import com.hyphenate.chat.EMClient;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -39,6 +46,7 @@ public class MainActivity extends BaseActivity {
     HomeFragment mHomeFragment;
     PersonFragment mPersonFragment;
     MessageListFragment mMessageListFragment;
+    FindFragment mFindFragment;
 
     private Fragment mOldFragment, mCurrentFragment;
 
@@ -46,6 +54,12 @@ public class MainActivity extends BaseActivity {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initEasemob();
     }
 
     @Override
@@ -64,6 +78,7 @@ public class MainActivity extends BaseActivity {
         mHomeFragment = new HomeFragment();
         mMessageListFragment = new MessageListFragment();
         mPersonFragment = new PersonFragment();
+        mFindFragment = new FindFragment();
 
         switchFragment(new Fragment(), mHomeFragment);
         main_btn_dachu.setSelected(true);
@@ -94,6 +109,8 @@ public class MainActivity extends BaseActivity {
 
             case R.id.main_btn_faxian:
                 //发现
+                switchFragment(mCurrentFragment, mFindFragment);
+
                 selectedView(main_btn_faxian);
                 break;
             case R.id.main_btn_wode:
@@ -128,7 +145,6 @@ public class MainActivity extends BaseActivity {
         }
     }
 
-
     private void selectedView(View view) {
         clearSelected();
         view.setSelected(true);
@@ -140,5 +156,46 @@ public class MainActivity extends BaseActivity {
         main_btn_faxian.setSelected(false);
         main_btn_xiaoxi.setSelected(false);
         main_btn_wode.setSelected(false);
+    }
+
+    /**
+     * 初始化环信
+     */
+    private void initEasemob() {
+        EMClient.getInstance().login((String) SharedPreferencesUtil.getPreference(this, "username"), "123456", new EMCallBack() {
+            @Override
+            public void onSuccess() {
+                EMClient.getInstance().groupManager().loadAllGroups();
+                EMClient.getInstance().chatManager().loadAllConversations();
+                Log.e("TAG", "登录成功");
+            }
+
+            @Override
+            public void onError(int i, String s) {
+                Log.e("TAG", "登录失败" + s);
+            }
+
+            @Override
+            public void onProgress(int i, String s) {
+
+            }
+        });
+        EMClient.getInstance().addConnectionListener(new EMConnectionListener() {
+            @Override
+            public void onConnected() {
+
+            }
+
+            @Override
+            public void onDisconnected(int error) {
+                if (error == EMError.USER_REMOVED) {
+                    // 显示帐号已经被移除
+                } else if (error == EMError.USER_LOGIN_ANOTHER_DEVICE) {
+                    // 显示帐号在其他设备登录
+                } else {
+
+                }
+            }
+        });
     }
 }

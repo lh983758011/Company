@@ -67,6 +67,11 @@ public class EasemobUtil {
         });
     }
 
+    //更换昵称
+    public static void updateName(String name) {
+        EMClient.getInstance().updateCurrentUserNick(name);
+    }
+
     //添加连接监听器
     public static void addConnectListener() {
         //注册一个监听连接状态的listener

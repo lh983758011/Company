@@ -11,6 +11,7 @@ import android.view.View;
 
 import com.goldenchef.company.R;
 import com.goldenchef.company.common.BaseActivity;
+import com.goldenchef.company.entities.LoginEntity;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.main.MainActivity;
 import com.goldenchef.company.utils.Constants;
@@ -173,9 +174,10 @@ public class LoginActivity extends BaseActivity implements LoginContract.View {
     }
 
     @Override
-    public void loginSuccessful(String token) {
+    public void loginSuccessful(LoginEntity entity) {
         preferenceCommit("isLogin", true);
-        preferenceCommit("token", token);
+        preferenceCommit("token", entity.getToken());
+        preferenceCommit("username", entity.getPhoneNumber());
 
         showToast("登录成功");
         jumpToMain();
