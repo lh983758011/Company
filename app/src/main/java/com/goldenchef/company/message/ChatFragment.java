@@ -1,10 +1,14 @@
 package com.goldenchef.company.message;
 
 import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
+import com.goldenchef.company.R;
 import com.hyphenate.chat.EMMessage;
 import com.hyphenate.easeui.domain.EaseEmojicon;
 import com.hyphenate.easeui.ui.EaseChatFragment;
@@ -40,6 +44,11 @@ public class ChatFragment extends EaseChatFragment implements EaseChatFragment.E
     public void onAttach(Context context) {
         super.onAttach(context);
         mChatActivity = (ChatActivity) context;
+    }
+
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_chat, null);
     }
 
     @Override

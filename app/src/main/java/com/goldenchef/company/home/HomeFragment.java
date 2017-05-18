@@ -17,7 +17,6 @@ import com.goldenchef.company.common.BaseFragment;
 import com.goldenchef.company.entities.ResumeEntity;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.utils.SharedPreferencesUtil;
-import com.goldenchef.company.utils.StatusBarCompat;
 import com.goldenchef.company.widgets.DividerItemDecoration;
 
 import java.util.ArrayList;
@@ -88,7 +87,7 @@ public class HomeFragment extends BaseFragment implements HomeContract.View {
     @Override
     public void initUI() {
         home_tb.setTitle("");
-        home_tb.setPadding(0, StatusBarCompat.getStatusBarHeight(mContext), 0, 0);
+//        home_tb.setPadding(0, StatusBarCompat.getStatusBarHeight(mContext), 0, 0);
         ((AppCompatActivity) mContext).setSupportActionBar(home_tb);
 
         createDots();

@@ -8,22 +8,23 @@ import android.view.View;
 import android.widget.Toast;
 
 import com.goldenchef.company.R;
-import com.goldenchef.company.api.ToStringConverterFactory;
 import com.goldenchef.company.common.BaseFragment;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.utils.Utils;
 import com.hyphenate.easeui.widget.EaseVoiceRecorderView;
 
-import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.UnsupportedEncodingException;
 
+import br.com.simplepass.loading_button_lib.customViews.CircularProgressImageButton;
 import butterknife.BindView;
 import okhttp3.OkHttpClient;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
+import retrofit2.converter.gson.GsonConverterFactory;
 import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
@@ -42,6 +43,8 @@ public class FindFragment extends BaseFragment {
     View btn_voice;
     @BindView(R.id.find_voice_recorder)
     EaseVoiceRecorderView find_voice_recorder;
+    @BindView(R.id.btn_id)
+    CircularProgressImageButton btn_id;
 
 
     @Override
@@ -62,10 +65,20 @@ public class FindFragment extends BaseFragment {
     @Override
     public void initUI() {
         showContent();
+
+        btn_id.startAnimation();
+
+        btn_id.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                btn_id.startAnimation();
+            }
+        });
+
+
         btn_voice.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
-
                 find_voice_recorder.onPressToSpeakBtnTouch(v, event, new EaseVoiceRecorderView.EaseVoiceRecorderCallback() {
 
                     @Override
@@ -76,29 +89,20 @@ public class FindFragment extends BaseFragment {
                             FileInputStream fileInputStream = null;
                             try {
                                 fileInputStream = new FileInputStream(file);
-                                BufferedInputStream bufferedInputStream = new BufferedInputStream(fileInputStream);
+                                byte[] buffer = new byte[(int) file.length()];
+                                fileInputStream.read(buffer);
 
-                                StringBuffer stringBuffer = new StringBuffer();
-                                byte[] buffer = new byte[1024];
-                                int length = 0;
-                                String itemStr = null;
-                                while ((length = bufferedInputStream.read(buffer)) != -1) {
-                                    itemStr = new String(buffer, 0, length);
-                                    stringBuffer.append(itemStr);
-                                }
+                                int fileSize = buffer.length;
+                                String resultStr = Base64.encodeToString(buffer, Base64.NO_WRAP);
 
-                                long fileSize = file.length();
-                                byte[] result = Base64.encode(stringBuffer.toString().getBytes("UTF-8"), Base64.DEFAULT);
-                                String resultStr = new String(result, "UTF-8");
                                 String deviceId = Utils.getDeviceID(mContext);
 
-
-                                createTestApi().testVoice((int) fileSize, deviceId, resultStr)
+                                createTestApi().testVoice(fileSize, deviceId, resultStr)
                                         .subscribeOn(Schedulers.io())
                                         .observeOn(AndroidSchedulers.mainThread())
-                                        .subscribe(new Action1<String>() {
+                                        .subscribe(new Action1<Object>() {
                                             @Override
-                                            public void call(String o) {
+                                            public void call(Object o) {
                                                 Log.e("TAG", "result:" + o);
                                                 Toast.makeText(mContext, "result:" + o, Toast.LENGTH_SHORT).show();
                                             }
@@ -111,6 +115,8 @@ public class FindFragment extends BaseFragment {
                                         });
 
                             } catch (FileNotFoundException e) {
+                                e.printStackTrace();
+                            } catch (UnsupportedEncodingException e) {
                                 e.printStackTrace();
                             } catch (IOException e) {
                                 e.printStackTrace();
@@ -139,7 +145,7 @@ public class FindFragment extends BaseFragment {
 
         @FormUrlEncoded
         @POST(BASE_URL)
-        Observable<String> testVoice(@Field("len") Integer len, @Field("cuid") String cuid, @Field("speech") String speech);
+        Observable<Object> testVoice(@Field("len") Integer len, @Field("cuid") String cuid, @Field("speech") String speech);
 
     }
 
@@ -147,7 +153,7 @@ public class FindFragment extends BaseFragment {
         Retrofit mRetrofit = new Retrofit.Builder()
                 .baseUrl(TestApi.BASE_URL)
                 .client(new OkHttpClient())
-                .addConverterFactory(new ToStringConverterFactory())
+                .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
         return mRetrofit.create(TestApi.class);

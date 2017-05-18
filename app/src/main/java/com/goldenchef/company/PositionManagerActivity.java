@@ -1,12 +1,10 @@
 package com.goldenchef.company;
 
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
-import android.view.WindowManager;
 
 import com.goldenchef.company.common.BaseActivity;
 import com.goldenchef.company.entities.PositionEntity;
@@ -54,10 +52,10 @@ public class PositionManagerActivity extends BaseActivity {
 
     @Override
     protected void initView() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            this.getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//        }
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.manage_tb);
         toolbar.setTitle("");

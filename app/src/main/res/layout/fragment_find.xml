@@ -1,8 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentTop="true"
+        android:background="@color/top_bar_normal_bg"
+        android:clipToPadding="true"
+        android:fitsSystemWindows="true"
+        android:gravity="center"
+        android:text="标题" />
 
     <com.hyphenate.easeui.widget.EaseVoiceRecorderView
         android:id="@+id/find_voice_recorder"
@@ -15,9 +26,30 @@
         android:id="@+id/btn_voice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:text="录音" />
+
+
+    <FrameLayout
+        android:layout_width="100dp"
+        android:layout_height="100dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:text="录音" />
+        android:layout_marginBottom="20dp">
+
+        <android.support.v7.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/background_oval_red" />
+
+        <android.support.v7.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="按住说话"
+            android:textColor="@android:color/black" />
+
+
+    </FrameLayout>
 
 </RelativeLayout>

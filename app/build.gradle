@@ -71,13 +71,17 @@ dependencies {
     provided 'javax.annotation:javax.annotation-api:1.2'
     compile 'com.google.dagger:dagger:2.10-rc4'
     apt 'com.google.dagger:dagger-compiler:2.10-rc4'
+    //其他
     compile 'com.contrarywind:Android-PickerView:3.0.5'
     compile('com.afollestad.material-dialogs:core:0.9.4.1') {
         transitive true
     }
     compile 'de.hdodenhof:circleimageview:2.1.0'
     compile 'com.makeramen:roundedimageview:2.3.0'
+    //动态权限
     compile 'pub.devrel:easypermissions:0.1.9'
+    //动态按钮
+    compile 'br.com.simplepass:loading-button-android:1.7.0'
     //环信
     compile project(':easeui')
 

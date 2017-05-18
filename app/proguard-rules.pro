@@ -89,5 +89,9 @@
 
 ## 环信
 -keep class com.hyphenate.** {*;}
+-keep class com.hyphenate.chat.** {*;}
 -dontwarn  com.hyphenate.**
+
+-keep public class com.google.vending.licensing.ILicensingService
+-keep public class com.android.vending.licensing.ILicensingService
 

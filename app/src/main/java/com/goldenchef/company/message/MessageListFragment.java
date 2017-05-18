@@ -12,7 +12,6 @@ import android.view.View;
 import com.goldenchef.company.R;
 import com.goldenchef.company.common.BaseFragment;
 import com.goldenchef.company.injector.component.AppComponent;
-import com.goldenchef.company.utils.StatusBarCompat;
 import com.hyphenate.easeui.EaseConstant;
 
 import java.util.Arrays;
@@ -58,7 +57,7 @@ public class MessageListFragment extends BaseFragment {
     @Override
     public void initUI() {
         message_list_tb.setTitle("");
-        message_list_tb.setPadding(0, StatusBarCompat.getStatusBarHeight(mContext), 0, 0);
+//        message_list_tb.setPadding(0, StatusBarCompat.getStatusBarHeight(mContext), 0, 0);
         ((AppCompatActivity) mContext).setSupportActionBar(message_list_tb);
 
         showContent();

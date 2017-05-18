@@ -14,7 +14,6 @@ import com.goldenchef.company.common.BaseFragment;
 import com.goldenchef.company.injector.component.AppComponent;
 import com.goldenchef.company.login.SignOutActivity;
 import com.goldenchef.company.position.EditPositionActivity;
-import com.goldenchef.company.utils.StatusBarCompat;
 
 import butterknife.BindView;
 import butterknife.OnClick;
@@ -55,7 +54,7 @@ public class PersonFragment extends BaseFragment {
         showContent();
 
         person_tb.setTitle("");
-        person_tb.setPadding(0, StatusBarCompat.getStatusBarHeight(mContext), 0, 0);
+//        person_tb.setPadding(0, StatusBarCompat.getStatusBarHeight(mContext), 0, 0);
 
         ((AppCompatActivity)mContext).setSupportActionBar(person_tb);
 
